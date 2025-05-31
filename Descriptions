@@ -1,0 +1,59 @@
+
+
+                OAuth Apps on the GitHub
+    Go to:
+        Settings -> Developer Settings -> OAuth Apps
+        enter "New OAuth app" and input:
+            Application name:
+                example_oauth2
+            Homepage URL:
+                http://localhost:8080
+            Application description:
+                some information
+            Authorization callback URL:
+                http://localhost:8080/login/oauth2/code/github
+        and click "Register app" -> we redirected to https://github.com/settings/applications/xxxxxxx
+        Copy Client ID (for exmp: Ov23lxI3ooZXxsxG6N44) and add to application.properties file:
+                spring.security.oauth2.client.registration.github.client-id=xxxxxxxxxxxxxxxxxxxxx
+        Click "Generate a new client secret", copy it and add to application.properties:
+                spring.security.oauth2.client.registration.github.client-secret=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        Restart app
+            and go to http://localhost:8080/api/v1/secured and login with GitHub
+
+
+
+                OAuth Apps on the Google
+    Go to:
+        console.cloud.google.com -> APIs & Services
+        and create new project (for exmp. "Example OAuth2")
+        -> OAuth consent screen -> Overview -> Click "Get Started":
+            APP INFORMATION:
+                App name:
+                    example_oauth2
+                User support email:
+                    your email
+                Developer contact email:
+            AUDIENCE:
+                checkbox "External"
+            CONTACT INFORMATION:
+                Email address:
+                    your email
+            FINISH:
+                checkbox "I agree..."
+        continue -> "Create"
+
+        -> Credentials
+        click "+CREATE CREDENTIALS" -> click "OAuth client ID":
+            Application type:
+                "Web application"
+            Name:
+                example_oauth2
+
+            Authorized redirect URIs:
+                http://localhost:8080/login/oauth2/code/google
+        click "Create" -> copy and past Client ID amd secret to application.properties:
+            spring.security.oauth2.client.registration.google.client-id=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+            spring.security.oauth2.client.registration.google.client-secret=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+    Restart app
+                and go to http://localhost:8080/api/v1/secured and login with Google
